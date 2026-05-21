@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS — LA APP QUE SIMPLIFICA TODO</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+:root {
+  --g: #25D366; --g2: #128C7E; --g3: #075E54;
+  --bg: #0d0f0e; --bg2: #141714; --bg3: #1a1e1b; --bg4: #212620;
+  --border: rgba(37,211,102,.12); --border2: rgba(37,211,102,.06);
+  --text: #e8ede9; --muted: #b4c4b8; --hint: #93a898;
+  --ig: #E1306C; --fb: #1877F2; --li: #0A66C2; --tg: #2AABEE; --wa: #25D366;
+  --tt: #FE2C55;
+  --mail: #7C9AFF;
+  --wc: #07C160; --line: #06C755; --voice: #F5A623;
+  --amber: #F5A623; --red: #E24B4A; --purple: #A78BFA;
+  --r: 8px; --rl: 14px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 54px;
+  background: rgba(13,15,14,.85); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border2);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; }
+.nav-mark { width: 28px; height: 28px; border-radius: 8px; background: var(--g); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #000; font-size: 14px; }
+.nav-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: -.02em; }
+.nav-links { display: flex; gap: 4px; }
+.nav-link { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; color: var(--muted); cursor: pointer; border: none; background: none; font-family: 'DM Sans', sans-serif; transition: all .15s; }
+.nav-link:hover { color: var(--text); background: var(--bg3); }
+.nav-link.active { color: var(--g); background: rgba(37,211,102,.1); }
+.nav-cta { padding: 6px 16px; border-radius: 20px; background: var(--g); font-size: 12px; font-weight: 600; color: #000; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; transition: background .15s; }
+.nav-cta:hover { background: var(--g2); }
+
+section { padding: 80px 28px; max-width: 1100px; margin: 0 auto; }
+section:first-of-type { padding-top: 120px; }
+.sec-label { font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--g); margin-bottom: 12px; }
+.sec-title { font-family: 'Syne', sans-serif; font-size: clamp(28px, 4vw, 42px); font-weight: 800; line-height: 1.15; letter-spacing: -.03em; color: var(--text); margin-bottom: 14px; }
+.sec-sub { font-size: 15px; color: var(--muted); line-height: 1.65; max-width: 560px; }
+
+#hero { padding-top: 130px; padding-bottom: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1100px; margin: 0 auto; }
+@media (max-width: 900px) {
+  #hero { grid-template-columns: 1fr; gap: 32px; padding-top: 100px; padding-left: 16px; padding-right: 16px; }
+  .nav-links { display: none; }
+  section { padding-left: 16px; padding-right: 16px; }
+  .features-grid, .mode-grid { grid-template-columns: 1fr; }
+  .app-preview > .ap-shell-grid { grid-template-columns: 1fr !important; height: auto !important; min-height: 320px; }
+  .ap-sidebar { flex-direction: row !important; flex-wrap: wrap; justify-content: center; align-content: flex-start; border-right: none !important; border-bottom: 1px solid var(--border2); padding: 8px !important; gap: 6px !important; }
+  .ap-mark { margin-bottom: 0 !important; }
+  .ap-pane.is-active.ap-pane--inbox { grid-template-columns: 1fr !important; display: flex !important; flex-direction: column !important; }
+  .i18n-grid.i18n-universal { grid-template-columns: 1fr; }
+  .i18n-grid, .mail-cards { grid-template-columns: 1fr; }
+  .inbox-filter { font-size: 11px; padding: 6px 10px; gap: 5px; }
+  .inbox-filter i { font-size: 13px; }
+  .hero-lema { letter-spacing: .14em; font-size: clamp(17px, 5.2vw, 32px); }
+  .hero-title { font-size: clamp(16px, 3.6vw, 26px) !important; }
+  .hero-delta { font-size: 13px; margin: -14px 0 16px; padding-left: 12px; }
+}
+.hero-lema {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(24px, 4.8vw, 46px);
+  font-weight: 800;
+  letter-spacing: .2em;
+  color: var(--g);
+  text-transform: uppercase;
+  margin: 0 0 20px;
+  line-height: 1.2;
+}
+.hero-title { font-family: 'Syne', sans-serif; font-size: clamp(18px, 2.75vw, 28px); font-weight: 800; line-height: 1.12; letter-spacing: -.035em; margin-bottom: 18px; }
+.hero-title span { color: var(--g); }
+.hero-desc { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 28px; }
+.hero-delta {
+  font-size: 14px; color: var(--muted); line-height: 1.65; max-width: 560px;
+  margin: -18px 0 22px; padding-left: 14px; border-left: 3px solid var(--g);
+}
+.hero-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-primary { padding: 10px 22px; border-radius: var(--rl); background: var(--g); font-size: 13px; font-weight: 600; color: #000; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; transition: all .15s; }
+.btn-primary:hover { background: var(--g2); transform: translateY(-1px); }
+.btn-ghost { padding: 10px 22px; border-radius: var(--rl); border: 1px solid var(--border); background: transparent; font-size: 13px; font-weight: 500; color: var(--text); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s; }
+.btn-ghost:hover { background: var(--bg3); }
+.platforms { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+.plat-chip { display: flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 20px; background: var(--bg3); border: 1px solid var(--border2); font-size: 11px; font-weight: 500; }
+.plat-dot-sm { width: 7px; height: 7px; border-radius: 50%; }
+
+.phone { width: 240px; max-width: 100%; height: 480px; border-radius: 32px; border: 2px solid var(--bg4); background: var(--bg2); overflow: hidden; position: relative; margin: 0 auto; box-shadow: 0 40px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04); display: flex; flex-direction: column; }
+.phone-msgs { flex: 1; overflow-y: auto; min-height: 0; }
+.phone-status { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px 4px; font-size: 10px; color: var(--muted); }
+.phone-header { display: flex; align-items: center; gap: 8px; padding: 6px 12px 8px; border-bottom: 1px solid var(--border2); }
+.phone-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--g); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #000; flex-shrink: 0; }
+.phone-name { font-size: 12px; font-weight: 500; }
+.phone-status-text { font-size: 10px; color: var(--g); }
+.phone-msgs { padding: 10px 10px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.pmsg { padding: 6px 9px; border-radius: 10px; font-size: 10px; line-height: 1.5; max-width: 85%; }
+.pmsg.in { background: var(--bg4); border-radius: 10px 10px 10px 2px; }
+.pmsg.out { background: rgba(37,211,102,.15); border-radius: 10px 10px 2px 10px; align-self: flex-end; }
+.pmsg-time { font-size: 8px; color: var(--hint); margin-top: 2px; }
+.phone-ai { margin: 4px 0; padding: 4px 8px; border-radius: 8px; background: rgba(37,211,102,.08); border: 1px solid rgba(37,211,102,.2); font-size: 9px; color: var(--g); text-align: center; align-self: center; }
+
+.demo-view-tabs {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-left: auto;
+}
+.demo-view-tab {
+  padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 600;
+  border: 1px solid var(--border2); background: var(--bg3); color: var(--muted);
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s;
+}
+.demo-view-tab:hover { color: var(--text); border-color: var(--border); }
+.demo-view-tab.active {
+  color: #000; background: var(--g); border-color: var(--g);
+  box-shadow: 0 0 0 1px rgba(37,211,102,.25);
+}
+.ap-demo-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.inbox-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; align-items: center; }
+.inbox-filter {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 14px; border-radius: 999px; background: var(--bg3);
+  border: 1px solid var(--border2); font-size: 12px; font-weight: 500; color: var(--muted);
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: border-color .15s, color .15s, background .15s;
+}
+.inbox-filter:hover { color: var(--text); border-color: var(--border); }
+.inbox-filter.active { color: var(--text); border-color: var(--g); background: rgba(37,211,102,.1); box-shadow: 0 0 0 1px rgba(37,211,102,.2); }
+.inbox-filter i { font-size: 15px; line-height: 1; }
+.inbox-filter .i-wa { color: #25D366; }
+.inbox-filter .i-ig { color: #E4405F; }
+.inbox-filter .i-fb { color: #1877F2; }
+.inbox-filter .i-tg { color: #26A5E4; }
+.inbox-filter .i-li { color: #0A66C2; }
+.inbox-filter .i-tt { color: #FE2C55; }
+.inbox-filter .i-mail { color: #7C9AFF; }
+.inbox-filter .i-voice { color: var(--voice); }
+.inbox-filter .i-wc { color: var(--wc); }
+.inbox-filter .i-line { color: var(--line); }
+.v5-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 24px; }
+@media (max-width: 700px) { .v5-grid { grid-template-columns: 1fr; } }
+.v5-card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: var(--rl);
+  padding: 18px 20px; position: relative; overflow: hidden;
+}
+.v5-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--g), transparent); opacity: .35;
+}
+.v5-card h4 { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.v5-card p { font-size: 13px; color: var(--muted); line-height: 1.62; margin-bottom: 10px; }
+.v5-cmd { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--g); background: var(--bg3); border: 1px solid var(--border2); border-radius: 8px; padding: 8px 10px; line-height: 1.5; }
+.app-preview { background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+.ap-shell-grid { display: grid; grid-template-columns: 56px minmax(0, 1fr); height: 400px; }
+.ap-demo-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 8px 12px; border-bottom: 1px solid var(--border2); background: var(--bg3); font-size: 11px; color: var(--muted); }
+.ap-pane-head { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; margin: 0 0 6px; color: var(--text); }
+.ap-pane-sub { font-size: 12px; color: var(--muted); line-height: 1.55; margin: 0 0 16px; }
+.ap-pane-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--rl); padding: 12px; margin-bottom: 10px; font-size: 11px; color: var(--muted); line-height: 1.5; }
+.ap-stat-row { display: flex; align-items: flex-end; gap: 4px; height: 64px; margin-top: 8px; }
+.ap-stat-bar { flex: 1; border-radius: 4px 4px 0 0; background: linear-gradient(180deg, var(--g), rgba(37,211,102,.35)); min-height: 12px; }
+.ap-metric-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 14px; }
+.ap-kpi {
+  background: var(--bg4); border: 1px solid var(--border2); border-radius: var(--rl); padding: 10px 12px;
+  display: flex; flex-direction: column; gap: 4px; min-width: 0;
+}
+.ap-kpi strong { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--g); line-height: 1.1; }
+.ap-kpi .ap-kpi-lbl { font-size: 10px; font-weight: 600; color: var(--text); line-height: 1.35; }
+.ap-kpi .ap-kpi-hint { font-size: 9px; color: var(--hint); }
+.ap-analytics-split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+@media (max-width: 900px) { .ap-analytics-split { grid-template-columns: 1fr; } }
+.ap-metric-line { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--border2); font-size: 10px; color: var(--muted); line-height: 1.45; }
+.ap-metric-line:last-child { border-bottom: none; }
+.ap-metric-line strong { font-size: 11px; color: var(--g); font-variant-numeric: tabular-nums; flex-shrink: 0; font-family: 'Syne', sans-serif; }
+.ap-metric-h2 { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text); margin: 0 0 8px; }
+.ap-hbar-row { display: grid; grid-template-columns: 88px 1fr 36px; align-items: center; gap: 8px; font-size: 10px; margin-bottom: 6px; color: var(--muted); }
+.ap-hbar-track { height: 8px; border-radius: 99px; background: var(--bg4); overflow: hidden; border: 1px solid var(--border2); }
+.ap-hbar-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--g), rgba(37,211,102,.45)); }
+.ap-hbar-pct { text-align: right; font-weight: 700; color: var(--g); font-variant-numeric: tabular-nums; }
+.ap-week-wrap { margin-top: 4px; }
+.ap-week-chart { display: flex; align-items: flex-end; justify-content: space-between; gap: 6px; height: 110px; margin-top: 8px; padding-top: 4px; border-top: 1px solid var(--border2); }
+.ap-week-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
+.ap-week-val { font-size: 10px; font-weight: 700; color: var(--g); font-variant-numeric: tabular-nums; }
+.ap-week-bar { width: 100%; max-width: 28px; border-radius: 4px 4px 0 0; background: linear-gradient(180deg, var(--g), rgba(37,211,102,.35)); align-self: flex-end; min-height: 8px; }
+.ap-week-dow { font-size: 9px; color: var(--hint); text-align: center; line-height: 1.2; }
+@media (max-width: 900px) {
+  .ap-metric-kpis { grid-template-columns: 1fr; }
+}
+.ap-team-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border2); font-size: 11px; }
+.ap-team-row:last-child { border-bottom: none; }
+.ap-team-av { width: 32px; height: 32px; border-radius: 50%; background: var(--bg4); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 10px; color: var(--g); flex-shrink: 0; }
+.ap-team-badge { display: inline-block; padding: 2px 7px; border-radius: 99px; font-size: 9px; font-weight: 600; background: rgba(37,211,102,.12); color: var(--g); border: 1px solid rgba(37,211,102,.25); margin-left: 6px; vertical-align: middle; }
+.ap-team-stat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+.ap-team-stat div { background: var(--bg4); border: 1px solid var(--border2); border-radius: var(--r); padding: 8px 10px; text-align: center; }
+.ap-team-stat strong { display: block; font-family: 'Syne', sans-serif; font-size: 16px; color: var(--g); }
+.ap-team-stat span { font-size: 9px; color: var(--hint); }
+.ap-cal-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+.ap-cal-toolbar span { font-size: 11px; color: var(--muted); }
+.ap-cal-toolbar strong { color: var(--text); font-family: 'Syne', sans-serif; }
+.ap-cal-week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 14px; }
+.ap-cal-dow { font-size: 8px; text-align: center; color: var(--hint); text-transform: uppercase; letter-spacing: .04em; padding-bottom: 4px; }
+.ap-cal-day { text-align: center; padding: 7px 2px; border-radius: 8px; font-size: 10px; color: var(--muted); background: var(--bg3); border: 1px solid var(--border2); }
+.ap-cal-day.has-event { border-color: rgba(37,211,102,.35); color: var(--text); }
+.ap-cal-day.is-today { border-color: var(--g); background: rgba(37,211,102,.1); color: var(--g); font-weight: 700; }
+.ap-cal-event { display: flex; gap: 10px; align-items: flex-start; }
+.ap-cal-event-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.ap-cal-event-body { flex: 1; min-width: 0; }
+.ap-cal-event-meta { font-size: 9px; color: var(--hint); margin-top: 4px; }
+.ap-msg-group { display: flex; flex-direction: column; gap: 3px; align-items: flex-start; max-width: 100%; align-self: flex-start; }
+.ap-msg-group.out { align-self: flex-end; align-items: flex-end; }
+.ap-trans {
+  max-width: 78%; padding: 6px 10px; border-radius: 8px;
+  border: 1px solid rgba(55, 138, 221, 0.45); background: rgba(55, 138, 221, 0.07);
+  font-size: 10px; line-height: 1.5; color: #b8ccd9;
+}
+.ap-msg-group.out .ap-trans { align-self: flex-end; text-align: left; }
+.ap-trans-h { display: flex; align-items: center; gap: 5px; font-size: 9px; font-weight: 700; color: #6eb3f0; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+.ap-trans-h i { font-size: 10px; opacity: .9; }
+.ap-sidebar { padding: 12px 0; display: flex; flex-direction: column; align-items: center; gap: 4px; border-right: 1px solid var(--border2); background: var(--bg2); }
+.ap-mark { width: 28px; height: 28px; border-radius: 8px; background: var(--g); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #000; font-size: 13px; margin-bottom: 8px; }
+.ap-icon { width: 34px; height: 34px; border-radius: var(--r); display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; border: none; background: transparent; transition: background .12s; }
+.ap-icon:hover { background: var(--bg3); }
+.ap-icon.on { background: var(--g); }
+.ap-pane { display: none !important; height: 100%; min-height: 0; box-sizing: border-box; }
+.ap-pane.is-active.ap-pane--inbox {
+  display: grid !important;
+  grid-template-columns: 220px minmax(0, 1fr) 230px;
+}
+.ap-pane.is-active.ap-pane--fill {
+  display: flex !important;
+  flex-direction: column;
+  overflow: auto;
+}
+.ap-shell-main > .ap-pane.is-active.ap-pane--fill {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  width: 100%;
+  background: var(--bg);
+}
+.ap-shell-main { position: relative; min-width: 0; height: 100%; }
+.ap-pane-body { padding: 14px; flex: 1; min-height: 0; overflow: auto; }
+.i18n-grid.i18n-universal { grid-template-columns: repeat(4, 1fr); }
+.ap-contactlist { border-right: 1px solid var(--border2); padding: 10px 0; background: var(--bg2); }
+.ap-search { margin: 0 10px 8px; padding: 6px 10px; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.ap-contact { padding: 8px 12px; display: flex; gap: 8px; cursor: pointer; border-bottom: 1px solid var(--border2); transition: background .1s; }
+.ap-contact:hover { background: var(--bg3); }
+.ap-contact.active { background: rgba(37,211,102,.06); border-left: 2px solid var(--g); }
+.ap-av { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #000; flex-shrink: 0; position: relative; }
+.ap-av-plat { position: absolute; bottom: -2px; right: -2px; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--bg2); display: flex; align-items: center; justify-content: center; font-size: 6px; }
+.ap-cn { font-size: 11px; font-weight: 500; flex: 1; min-width: 0; }
+.ap-cp { font-size: 10px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ap-ct { font-size: 9px; color: var(--hint); }
+.unread { width: 7px; height: 7px; border-radius: 50%; background: var(--g); flex-shrink: 0; margin-top: 3px; }
+.ap-chat { display: flex; flex-direction: column; background: var(--bg); }
+.ap-cheader { padding: 10px 12px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border2); background: var(--bg2); }
+.ap-cname { font-size: 13px; font-weight: 500; flex: 1; }
+.ap-cstatus { font-size: 10px; color: var(--g); }
+.plat-badge-sm {
+  padding: 2px 9px; border-radius: 8px; font-size: 10px; font-weight: 600; color: #fff;
+  display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 22px;
+}
+.plat-badge-sm i { font-size: 11px; line-height: 1; }
+.ap-msgs { padding: 12px; display: flex; flex-direction: column; gap: 8px; flex: 1; overflow-y: auto; overflow-x: hidden; min-height: 0; max-height: 360px; }
+.ap-bubble { padding: 7px 10px; border-radius: 10px; font-size: 11px; line-height: 1.55; max-width: 75%; }
+.ap-bubble.in { background: var(--bg3); border-radius: 10px 10px 10px 3px; }
+.ap-bubble.out { background: rgba(37,211,102,.12); border-radius: 10px 10px 3px 10px; align-self: flex-end; }
+.ap-ai-tag { align-self: center; padding: 3px 10px; border-radius: 10px; background: rgba(37,211,102,.08); border: 1px solid rgba(37,211,102,.2); font-size: 9px; color: var(--g); }
+.ap-input-row { padding: 8px 12px; border-top: 1px solid var(--border2); background: var(--bg2); display: flex; gap: 6px; align-items: center; }
+.ap-input { flex: 1; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 6px 12px; font-size: 11px; color: var(--muted); }
+.ap-send { width: 28px; height: 28px; border-radius: 50%; background: var(--g); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #000; }
+.ap-right { background: var(--bg2); border-left: 1px solid var(--border2); padding: 10px; overflow: hidden; }
+.ap-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--rl); padding: 10px; margin-bottom: 8px; }
+.ap-card-label { font-size: 9px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--hint); margin-bottom: 6px; }
+.ap-summary { background: var(--bg3); border: 1px solid rgba(37,211,102,.25); border-radius: var(--rl); padding: 10px; margin-bottom: 8px; }
+.ap-summary-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.ap-summary-title { font-size: 10px; font-weight: 500; }
+.ap-summary-badge { font-size: 9px; padding: 1px 6px; border-radius: 6px; background: rgba(37,211,102,.12); color: var(--g); }
+.ap-summary-text { font-size: 10px; color: var(--muted); line-height: 1.6; }
+.ap-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.ap-tag { padding: 2px 7px; border-radius: 8px; font-size: 9px; background: var(--bg4); color: var(--muted); border: 1px solid var(--border2); }
+.ap-tag.hot { background: rgba(226,75,74,.1); color: #E24B4A; border-color: rgba(226,75,74,.2); }
+.ap-summary-btns { display: flex; gap: 4px; margin-top: 8px; }
+.ap-sbtn { flex: 1; padding: 5px 0; border-radius: var(--r); font-size: 9px; font-weight: 500; border: 1px solid var(--border); background: var(--bg4); color: var(--muted); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .12s; }
+.ap-sbtn:hover { border-color: var(--g); color: var(--g); }
+.ap-sbtn.primary { background: var(--g); border-color: var(--g); color: #000; }
+
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 40px; }
+.feat-card { background: var(--bg2); border: 1px solid var(--border2); border-radius: var(--rl); padding: 20px; transition: border-color .2s, transform .2s; cursor: default; }
+.feat-card:hover { border-color: var(--border); transform: translateY(-2px); }
+.feat-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; margin-bottom: 12px; }
+.feat-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.feat-desc { font-size: 13px; color: var(--muted); line-height: 1.62; }
+
+.mode-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.mode-card { background: var(--bg2); border: 1.5px solid var(--border2); border-radius: var(--rl); padding: 18px; cursor: pointer; transition: all .2s; }
+.mode-card:hover { border-color: var(--border); transform: translateY(-1px); }
+.mode-card.sel-auto { border-color: var(--g); background: rgba(37,211,102,.04); }
+.mode-card.sel-partial { border-color: #378ADD; background: rgba(55,138,221,.04); }
+.mode-card.sel-manual { border-color: var(--amber); background: rgba(245,166,35,.04); }
+.mode-icon { font-size: 24px; margin-bottom: 10px; }
+.mode-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.mode-desc { font-size: 11px; color: var(--muted); line-height: 1.55; }
+.mode-pill { display: inline-block; margin-top: 8px; padding: 2px 8px; border-radius: 8px; font-size: 9px; font-weight: 600; }
+
+.behavior-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: var(--bg2); border-radius: var(--rl); overflow: hidden; border: 1px solid var(--border2); }
+.behavior-table th { padding: 10px 14px; text-align: left; font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--hint); border-bottom: 1px solid var(--border2); background: var(--bg3); }
+.behavior-table td { padding: 9px 14px; font-size: 11px; border-bottom: 1px solid var(--border2); }
+.behavior-table tr:last-child td { border-bottom: none; }
+.behavior-table tr:hover td { background: rgba(37,211,102,.03); }
+.td-feat { color: var(--muted); }
+.badge-auto { background: rgba(37,211,102,.12); color: var(--g); padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 500; }
+.badge-partial { background: rgba(55,138,221,.12); color: #378ADD; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 500; }
+.badge-manual { background: rgba(245,166,35,.12); color: var(--amber); padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 500; }
+.badge-off { background: var(--bg4); color: var(--hint); padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 500; }
+
+.ob-shell { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; max-width: 600px; margin: 0 auto; }
+.ob-topbar { padding: 14px 20px; background: var(--bg3); border-bottom: 1px solid var(--border2); display: flex; align-items: center; justify-content: space-between; }
+.ob-logo { display: flex; align-items: center; gap: 8px; }
+.ob-logo-mark { width: 24px; height: 24px; border-radius: 7px; background: var(--g); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #000; font-size: 12px; }
+.ob-logo-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; }
+.pills { display: flex; align-items: center; gap: 5px; }
+.pill { width: 22px; height: 22px; border-radius: 50%; font-size: 10px; font-weight: 600; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); color: var(--hint); cursor: pointer; transition: all .15s; }
+.pill.done { background: var(--g); border-color: var(--g); color: #000; }
+.pill.active { border-color: var(--g); color: var(--g); }
+.pill-line { width: 14px; height: 1px; background: var(--border); }
+.pill-line.done { background: var(--g); }
+.ob-body { padding: 24px 28px; }
+.ob-step { display: none; }
+.ob-step.active { display: block; }
+.ob-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--g); margin-bottom: 6px; }
+.ob-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+.ob-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+.field-group { margin-bottom: 14px; }
+.field-label { font-size: 11px; font-weight: 500; color: var(--muted); margin-bottom: 5px; display: block; }
+.field-input { width: 100%; padding: 9px 12px; border-radius: var(--r); background: var(--bg3); border: 1px solid var(--border); font-size: 12px; color: var(--text); font-family: 'DM Sans', sans-serif; outline: none; transition: border-color .15s; }
+.field-input:focus { border-color: var(--g); }
+.plat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
+@media (min-width: 520px) {
+  .plat-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.plat-card { background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--r); padding: 10px 12px; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: border-color .15s; }
+.plat-card:hover { border-color: var(--border); }
+.plat-card.sel { border-color: var(--g); border-width: 1.5px; background: rgba(37,211,102,.05); }
+.plat-card.connected { border-color: var(--g); }
+.plat-name { font-size: 12px; font-weight: 500; flex: 1; }
+.plat-check { width: 16px; height: 16px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 9px; color: var(--hint); transition: all .15s; }
+.plat-card.sel .plat-check, .plat-card.connected .plat-check { background: var(--g); border-color: var(--g); color: #000; }
+.ob-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; margin-top: 16px; border-top: 1px solid var(--border2); }
+.ob-skip { font-size: 12px; color: var(--hint); cursor: pointer; background: none; border: none; font-family: 'DM Sans', sans-serif; }
+.ob-skip:hover { color: var(--muted); }
+.ob-next { padding: 8px 20px; border-radius: var(--rl); background: var(--g); border: none; color: #000; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s; }
+.ob-next:hover { background: var(--g2); }
+.ob-next:disabled { background: var(--bg4); color: var(--hint); cursor: not-allowed; }
+.toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--r); margin-bottom: 6px; }
+.toggle-label { font-size: 12px; font-weight: 500; }
+.toggle-sub { font-size: 10px; color: var(--muted); margin-top: 1px; }
+.toggle { width: 34px; height: 18px; border-radius: 9px; background: var(--bg4); cursor: pointer; position: relative; transition: background .2s; flex-shrink: 0; }
+.toggle.on { background: var(--g); }
+.toggle-thumb { position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: white; transition: transform .2s; }
+.toggle.on .toggle-thumb { transform: translateX(16px); }
+.success-icon { font-size: 48px; text-align: center; margin-bottom: 16px; }
+.feat-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.feat-row { display: flex; align-items: flex-start; gap: 10px; }
+.feat-check-circle { width: 18px; height: 18px; border-radius: 50%; background: rgba(37,211,102,.15); border: 1px solid rgba(37,211,102,.35); display: flex; align-items: center; justify-content: center; font-size: 9px; color: var(--g); flex-shrink: 0; margin-top: 1px; }
+.feat-row-text { font-size: 12px; }
+.feat-row-sub { font-size: 10px; color: var(--muted); }
+.wa-cmd-box { background: rgba(37,211,102,.06); border: 1px solid rgba(37,211,102,.2); border-radius: var(--r); padding: 10px 14px; margin-top: 12px; }
+.wa-cmd-title { font-size: 10px; font-weight: 600; color: var(--g); margin-bottom: 6px; }
+.wa-cmd-text { font-size: 11px; color: var(--muted); }
+code { font-family: 'DM Mono', monospace; font-size: 10px; background: var(--bg3); padding: 1px 5px; border-radius: 4px; border: 1px solid var(--border2); color: var(--text); }
+.divider { height: 1px; background: var(--border2); max-width: 1100px; margin: 0 auto; }
+footer { padding: 30px 28px; text-align: center; color: var(--hint); font-size: 11px; border-top: 1px solid var(--border2); }
+.i18n-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+.i18n-col { background: var(--bg2); border: 1px solid var(--border2); border-radius: var(--rl); padding: 16px; }
+.i18n-col h4 { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--text); }
+.i18n-col h4 code { font-size: 10px; vertical-align: middle; }
+.i18n-sample { font-size: 12px; color: var(--muted); line-height: 1.62; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border2); white-space: pre-wrap; }
+.i18n-sample:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.i18n-sample .lbl { font-size: 9px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--g); margin-bottom: 6px; display: block; }
+.mail-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
+.mail-card { background: var(--bg2); border: 1px solid var(--border2); border-radius: var(--rl); padding: 16px; }
+.mail-card h4 { font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+.mail-card p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.sec-note { font-size: 13px; color: var(--muted); margin-top: 18px; max-width: 720px; line-height: 1.6; opacity: 0.98; }
+.sec-wide { max-width: 820px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-mark">N</div>
+    <span class="nav-name">NEXUS</span>
+  </div>
+  <div class="nav-links">
+    <button type="button" class="nav-link active" onclick="jumpTo('hero', this)">Inicio</button>
+    <button type="button" class="nav-link" onclick="jumpTo('app', this)">App</button>
+    <button type="button" class="nav-link" onclick="jumpTo('agenda', this)">Agenda</button>
+    <button type="button" class="nav-link" onclick="jumpTo('correo', this)">Correo</button>
+    <button type="button" class="nav-link" onclick="jumpTo('features', this)">Funciones</button>
+    <button type="button" class="nav-link" onclick="jumpTo('automation', this)">Modos</button>
+    <button type="button" class="nav-link" onclick="jumpTo('onboarding', this)">Onboarding</button>
+  </div>
+  <button type="button" class="nav-cta" onclick="jumpTo('onboarding')">Configurar NEXUS</button>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-left">
+    <p class="hero-lema">LA APP QUE SIMPLIFICA TODO</p>
+    <h1 class="hero-title">Todos tus chats<br>y tu correo,<br><span>en tu WhatsApp</span></h1>
+    <p class="hero-desc">NEXUS une WhatsApp Business, Instagram DMs y correo (Gmail / Outlook / IMAP). Misma base de datos, mismos recordatorios y comandos por WhatsApp — vos seguís en WhatsApp.</p>
+    <p class="hero-delta">No es “un chat más”: es <strong>operación comercial completa</strong> (bandeja + correo + agenda + automatización + briefing diario) pensada para equipos que cierran ventas desde el móvil, sin encadenar cuatro herramientas distintas.</p>
+    <div class="hero-btns">
+      <button type="button" class="btn-primary" onclick="jumpTo('onboarding')">Empezar ahora</button>
+      <button type="button" class="btn-ghost" onclick="jumpTo('app')">Ver la app</button>
+    </div>
+    <div class="platforms">
+      <div class="plat-chip"><i class="fa-brands fa-whatsapp" style="color:#25D366;font-size:14px"></i> WhatsApp</div>
+      <div class="plat-chip"><i class="fa-brands fa-instagram" style="color:#E4405F;font-size:14px"></i> Instagram</div>
+      <div class="plat-chip"><i class="fa-solid fa-envelope" style="color:#7C9AFF;font-size:13px"></i> Correo</div>
+    </div>
+  </div>
+  <div class="phone">
+    <div class="phone-status"><span>9:41</span><span>●●●</span></div>
+    <div class="phone-header">
+      <div class="phone-avatar">N</div>
+      <div><div class="phone-name">NEXUS</div><div class="phone-status-text">● En línea</div></div>
+    </div>
+    <div class="phone-msgs">
+      <div class="pmsg in">⏳ <strong>Ana García</strong> (Instagram) — 7 días sin contacto.<br><br>Último: "¿Cuándo me mandás el presupuesto?"<br><br>Respondé <strong>SÍ</strong> para generar un mensaje de reapertura.</div>
+      <div class="pmsg-time">09:02</div>
+      <div class="pmsg out">SÍ</div>
+      <div class="pmsg-time" style="text-align:right">09:02</div>
+      <div class="phone-ai">🤖 Generando mensaje con IA...</div>
+      <div class="pmsg in">"Hola Ana! Quedé en mandarte el presupuesto. ¿Seguís interesada en el paquete profesional?"<br><br>Respondé <strong>ENVIAR</strong> o <strong>EDITAR</strong>.</div>
+      <div class="pmsg-time">09:02</div>
+      <div class="pmsg out">ENVIAR</div>
+      <div class="pmsg-time" style="text-align:right">09:03</div>
+      <div class="pmsg in">✅ Mensaje enviado a Ana García.</div>
+      <div class="pmsg-time">09:03</div>
+      <div class="pmsg in">📧 Nuevo lead por correo: <strong>presupuesto@cliente.com</strong> — asunto «Consulta paquete». ¿Querés resumen?</div>
+      <div class="pmsg-time">09:18</div>
+      <div class="pmsg-time">10:41</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- APP PREVIEW -->
+<section id="app">
+  <div class="sec-label">Bandeja unificada</div>
+  <h2 class="sec-title">La app completa</h2>
+  <p class="sec-sub" style="margin-bottom:12px;max-width:640px;">Todas tus conversaciones en un solo panel. Filtrá por canal con los íconos oficiales y abrí un contacto para ver el hilo con traducciones asistidas por IA.</p>
+  <p class="sec-sub" style="margin-bottom:20px;max-width:640px;font-size:13px;color:var(--hint)">En la demo de abajo podés recorrer <strong>Bandeja</strong> (contactos y chat), <strong>Agenda</strong>, <strong>Equipo</strong> y <strong>Métricas</strong> con datos de ejemplo.</p>
+  <div class="inbox-filters" id="inbox-filters" role="tablist" aria-label="Filtrar por plataforma">
+    <button type="button" class="inbox-filter active" data-platform="all" aria-selected="true"><i class="fa-solid fa-layer-group" style="color:var(--g);font-size:13px"></i> <span data-i18n-key="filterAll">Todos</span></button>
+    <button type="button" class="inbox-filter" data-platform="wa" aria-selected="false"><i class="fa-brands fa-whatsapp i-wa"></i> WhatsApp</button>
+    <button type="button" class="inbox-filter" data-platform="ig" aria-selected="false"><i class="fa-brands fa-instagram i-ig"></i> Instagram</button>
+    <button type="button" class="inbox-filter" data-platform="email" aria-selected="false"><i class="fa-solid fa-envelope i-mail"></i> Correo</button>
+  </div>
+  <div class="app-preview">
+    <div class="ap-demo-bar">
+      <span><span id="demo-ui-label">Vista interactiva (demo)</span> — <strong>NEXUS</strong> · Producto en castellano</span>
+      <div class="demo-view-tabs" role="tablist" aria-label="Vistas de la app">
+        <button type="button" class="demo-view-tab active" data-ap-view="inbox" onclick="switchAppView('inbox', null, this)">💬 Bandeja</button>
+        <button type="button" class="demo-view-tab" data-ap-view="calendar" onclick="switchAppView('calendar', null, this)">📅 Agenda</button>
+        <button type="button" class="demo-view-tab" data-ap-view="team" onclick="switchAppView('team', null, this)">👥 Equipo</button>
+        <button type="button" class="demo-view-tab" data-ap-view="analytics" onclick="switchAppView('analytics', null, this)">📊 Métricas</button>
+      </div>
+    </div>
+    <div class="ap-shell-grid">
+      <div class="ap-sidebar">
+        <div class="ap-mark">N</div>
+        <button type="button" class="ap-icon on" data-ap-view="inbox" title="Bandeja" aria-label="Bandeja" onclick="switchAppView('inbox', this)">💬</button>
+        <button type="button" class="ap-icon" data-ap-view="calendar" title="Agenda" aria-label="Agenda" onclick="switchAppView('calendar', this)">📅</button>
+        <button type="button" class="ap-icon" data-ap-view="team" title="Equipo" aria-label="Equipo" onclick="switchAppView('team', this)">👥</button>
+        <button type="button" class="ap-icon" data-ap-view="analytics" title="Métricas" aria-label="Métricas" onclick="switchAppView('analytics', this)">📊</button>
+        <div style="flex:1"></div>
+        <div style="width:30px;height:30px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#000;cursor:pointer;">LC</div>
+      </div>
+      <div class="ap-shell-main">
+      <div id="ap-pane-inbox" class="ap-pane ap-pane--inbox is-active">
+      <div class="ap-contactlist">
+        <div class="ap-search"><span style="font-size:11px">🔍</span><span data-i18n-key="search">Buscar...</span></div>
+        
+        <div class="ap-contact active" data-platform="ig" data-contact="Ana García" onclick="selectContact(this)">
+          <div class="ap-av" style="background:#E1306C">AG<div class="ap-av-plat" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)"><i class="fa-brands fa-instagram" style="font-size:7px;color:#fff"></i></div></div>
+          <div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between"><span class="ap-cn">Ana García</span><span class="ap-ct">10:42</span></div><div class="ap-cp">¿Cuándo me mandás el presupuesto?</div></div>
+          <div class="unread"></div>
+        </div>
+        <div class="ap-contact" data-platform="ig" data-contact="Marie Dubois" onclick="selectContact(this)">
+          <div class="ap-av" style="background:#C13584">MD<div class="ap-av-plat" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)"><i class="fa-brands fa-instagram" style="font-size:7px;color:#fff"></i></div></div>
+          <div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between"><span class="ap-cn">Marie Dubois</span><span class="ap-ct">Ayer</span></div><div class="ap-cp">Bonjour, est-ce que vous livrez en Belgique ?</div></div>
+        </div>
+        
+        <div class="ap-contact" data-platform="wa" data-contact="Valentina Costa" onclick="selectContact(this)">
+          <div class="ap-av" style="background:#128C7E">VC<div class="ap-av-plat" style="background:#25D366"><i class="fa-brands fa-whatsapp" style="font-size:8px;color:#fff"></i></div></div>
+          <div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between"><span class="ap-cn">Valentina Costa</span><span class="ap-ct">Lun</span></div><div class="ap-cp">Ciao! Avete postazioni disponibili a marzo?</div></div>
+        </div>
+        
+        
+        
+        
+        <div class="ap-contact" data-platform="email" data-contact="presupuesto@cliente.com" onclick="selectContact(this)">
+          <div class="ap-av" style="background:#7C9AFF">@<div class="ap-av-plat" style="background:#4285F4"><i class="fa-solid fa-envelope" style="font-size:7px;color:#fff"></i></div></div>
+          <div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between"><span class="ap-cn">presupuesto@cliente.com</span><span class="ap-ct">Dom</span></div><div class="ap-cp">Consulta paquete profesional</div></div>
+        </div>
+        <div class="ap-contact" data-platform="ig" data-contact="Sofía Molina" onclick="selectContact(this)">
+          <div class="ap-av" style="background:#833AB4">SM<div class="ap-av-plat" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)"><i class="fa-brands fa-instagram" style="font-size:7px;color:#fff"></i></div></div>
+          <div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between"><span class="ap-cn">Sofía Molina</span><span class="ap-ct">Dom</span></div><div class="ap-cp">¡Muchas gracias por todo!</div></div>
+        </div>
+      </div>
+      <div class="ap-chat">
+        <div class="ap-cheader">
+          <div class="ap-av" id="chat-av" style="background:#E1306C;width:28px;height:28px;font-size:9px;font-weight:700;color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">AG</div>
+          <div style="flex:1"><div class="ap-cname" id="chat-name">Ana García</div><div class="ap-cstatus" data-i18n-key="online">● En línea</div></div>
+          <div class="plat-badge-sm" id="chat-plat" style="background:#E1306C"><i class="fa-brands fa-instagram"></i> Instagram</div>
+          <button type="button" style="width:26px;height:26px;border-radius:var(--r);border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:11px;" onclick="openSummary()" title="Resumen IA">🤖</button>
+        </div>
+        <div class="ap-msgs" id="chat-msgs">
+<div class="ap-ai-tag">💾 Base de datos guardada · hace 3 días</div>
+<div class="ap-msg-group"><div class="ap-bubble in">Hola! Vi tu perfil y me interesa mucho tu servicio de diseño. ¿Podés contarme sobre los paquetes?</div></div>
+<div class="ap-msg-group out"><div class="ap-bubble out">¡Hola Ana! Tenemos tres paquetes: básico, profesional ($450 USD) y premium.</div></div>
+<div class="ap-msg-group"><div class="ap-bubble in">I am comparing two agencies — can you send a one-page PDF in English?</div><div class="ap-trans"><span class="ap-trans-h"><i class="fa-solid fa-globe"></i> Traducción IA (EN → ES)</span>Estoy comparando dos agencias: ¿podés enviar un PDF de una página en inglés?</div></div>
+<div class="ap-msg-group out"><div class="ap-bubble out">Sí, te lo mando hoy. ¿Te sirve versión en portugués también?</div><div class="ap-trans"><span class="ap-trans-h"><i class="fa-solid fa-globe"></i> Traducción IA (ES → PT)</span>Sim, envio hoje. Quer também uma versão em português?</div></div>
+<div class="ap-ai-tag">📅 Evento creado en Google Calendar · Lun 3 Mayo 15hs</div>
+<div class="ap-msg-group"><div class="ap-bubble in">¿Cuándo me mandás el presupuesto?</div></div>
+        </div>
+        <div class="ap-input-row">
+          <div class="ap-input" id="chat-input-display">Respondé desde WhatsApp hacia Instagram…</div>
+          <button style="width:26px;height:26px;border-radius:var(--r);border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:10px;color:var(--muted);">🎤</button>
+          <button class="ap-send">➤</button>
+        </div>
+      </div>
+      <div class="ap-right">
+        <div class="ap-summary">
+          <div class="ap-summary-header"><span class="ap-summary-title" data-i18n-key="aiSummary">🤖 Resumen IA</span><span class="ap-summary-badge" data-i18n-key="today">Hoy</span></div>
+          <div class="ap-summary-text" id="right-summary">Ana contactó el 28/Mar interesada en diseño. Consultó paquetes, se interesó en Profesional ($450). Reunión virtual acordada Lun 3 May 15hs.</div>
+          <div class="ap-tags"><span class="ap-tag hot">🔥 Prospecto caliente</span><span class="ap-tag">Diseño</span><span class="ap-tag">$450</span></div>
+          <div class="ap-summary-btns">
+            <button class="ap-sbtn" onclick="openSummary()">📄 Texto</button>
+            <button class="ap-sbtn" onclick="openSummary()">🎧 Audio</button>
+            <button class="ap-sbtn primary" onclick="openSummary()">+ Nuevo</button>
+          </div>
+        </div>
+        <div class="ap-card">
+          <div class="ap-card-label" data-i18n-key="cardEvents">Próximos eventos</div>
+          <div style="font-size:10px;color:var(--muted);display:flex;flex-direction:column;gap:5px;" id="right-events">
+            <div style="display:flex;gap:6px;align-items:center"><div style="width:7px;height:7px;border-radius:50%;background:#E1306C;flex-shrink:0"></div>Reunión Ana · Lun 3 May 15:00</div>
+            <div style="display:flex;gap:6px;align-items:center"><div style="width:7px;height:7px;border-radius:50%;background:#0A66C2;flex-shrink:0"></div>Cotización presupuesto@cliente.com · Mar 4 May 10:00</div>
+          </div>
+        </div>
+        <div class="ap-card">
+          <div class="ap-card-label" data-i18n-key="cardContact">Estado del contacto</div>
+          <div style="font-size:11px;color:var(--muted)" id="right-status">Plataforma: Instagram · @ana.garcia<br>Primer contacto: 28 Mar 2025<br>Conversaciones: 3</div>
+        </div>
+      </div>
+      </div>
+
+      <div id="ap-pane-calendar" class="ap-pane ap-pane--fill">
+        <div class="ap-pane-body">
+          <h3 class="ap-pane-head" data-i18n-key="paneCalendar">Agenda</h3>
+          <p class="ap-pane-sub" data-i18n-key="paneCalendarSub">Vista previa: los eventos que detecta NEXUS en los chats aparecen acá y en Google Calendar.</p>
+          <div class="ap-cal-toolbar">
+            <strong>Mayo 2026</strong>
+            <span>Sincronizado con Google Calendar · zona Argentina</span>
+          </div>
+          <div class="ap-cal-week" aria-hidden="true">
+            <div class="ap-cal-dow">Lun</div><div class="ap-cal-dow">Mar</div><div class="ap-cal-dow">Mié</div><div class="ap-cal-dow">Jue</div><div class="ap-cal-dow">Vie</div><div class="ap-cal-dow">Sáb</div><div class="ap-cal-dow">Dom</div>
+            <div class="ap-cal-day">28</div><div class="ap-cal-day">29</div><div class="ap-cal-day">30</div><div class="ap-cal-day has-event">1</div><div class="ap-cal-day has-event">2</div><div class="ap-cal-day is-today has-event">3</div><div class="ap-cal-day has-event">4</div>
+          </div>
+          <div class="ap-pane-card ap-cal-event">
+            <div class="ap-cal-event-dot" style="background:#E1306C"></div>
+            <div class="ap-cal-event-body"><strong>Lun 09:00 — Demo con Ana</strong><div class="ap-cal-event-meta">Instagram · detectado en el chat · recordatorio 24 h y 1 h activos</div></div>
+          </div>
+          <div class="ap-pane-card ap-cal-event">
+            <div class="ap-cal-event-dot" style="background:#E1306C"></div>
+            <div class="ap-cal-event-body"><strong>Mar 15:30 — Follow-up Ana</strong><div class="ap-cal-event-meta">Instagram · seguimiento post-reunión · incluido en briefing 08:00</div></div>
+          </div>
+          <div class="ap-pane-card ap-cal-event">
+            <div class="ap-cal-event-dot" style="background:#7C9AFF"></div>
+            <div class="ap-cal-event-body"><strong>Mié 11:00 — Cotización presupuesto@cliente.com</strong><div class="ap-cal-event-meta">Correo · creado desde hilo de consulta · envío de propuesta pendiente</div></div>
+          </div>
+          <div class="ap-pane-card" style="font-size:10px;color:var(--hint)">💡 Pedí <em>resumen [nombre]</em> por WhatsApp antes de cada reunión para recibir contexto del hilo.</div>
+        </div>
+      </div>
+
+      <div id="ap-pane-team" class="ap-pane ap-pane--fill">
+        <div class="ap-pane-body">
+          <h3 class="ap-pane-head" data-i18n-key="paneTeam">Equipo</h3>
+          <p class="ap-pane-sub" data-i18n-key="paneTeamSub">Roles de ejemplo: en producción cada operador responde desde su WhatsApp con permisos definidos.</p>
+          <div class="ap-team-stat">
+            <div><strong>3</strong><span>Operadores</span></div>
+            <div><strong>2</strong><span>En línea ahora</span></div>
+            <div><strong>186</strong><span>Conversaciones activas</span></div>
+          </div>
+          <div class="ap-pane-card" style="padding:0;background:transparent;border:none;">
+            <div class="ap-team-row"><div class="ap-team-av">LC</div><div><strong>Leo Castro</strong> <span class="ap-team-badge">Admin</span><br><span data-i18n-key="roleSales">Ventas</span> · <span style="color:var(--hint);font-size:10px">WhatsApp + Instagram · ve todas las bandejas</span></div></div>
+            <div class="ap-team-row"><div class="ap-team-av">AG</div><div><strong>Ana García</strong> <span class="ap-team-badge">Operador</span><br><span data-i18n-key="roleOps">Operaciones</span> · <span style="color:var(--hint);font-size:10px">Instagram + correo · responde desde su WhatsApp</span></div></div>
+            <div class="ap-team-row"><div class="ap-team-av">MR</div><div><strong>María Ríos</strong> <span class="ap-team-badge">Soporte</span><br><span data-i18n-key="roleSupport">Atención al cliente</span> · <span style="color:var(--hint);font-size:10px">WhatsApp + correo · solo sus contactos asignados</span></div></div>
+          </div>
+          <div class="ap-pane-card" style="font-size:10px;color:var(--hint)">Los permisos definen qué canales ve cada persona y si puede enviar recordatorios automáticos o solo borradores para aprobar.</div>
+        </div>
+      </div>
+      <div id="ap-pane-analytics" class="ap-pane ap-pane--fill">
+        <div class="ap-pane-body">
+          <h3 class="ap-pane-head" data-i18n-key="paneAnalytics">Métricas</h3>
+          <p class="ap-pane-sub" data-i18n-key="paneAnalyticsSub">Vista demo agregada: operación multicanal, ventas cerradas, automatización NEXUS (recordatorios, briefings, resúmenes IA, agenda) y tiempo de uso del panel.</p>
+          <div class="ap-metric-kpis">
+            <div class="ap-kpi">
+              <span class="ap-kpi-lbl" data-i18n-key="mKpi1">Respuestas dentro de SLA (24 h)</span>
+              <strong>94%</strong>
+              <span class="ap-kpi-hint" data-i18n-key="mKpi1Hint">Meta del equipo: 90% · conversaciones medidas: 186</span>
+            </div>
+            <div class="ap-kpi">
+              <span class="ap-kpi-lbl" data-i18n-key="mKpi2">Primera respuesta humana (mediana)</span>
+              <strong>11 min</strong>
+              <span class="ap-kpi-hint" data-i18n-key="mKpi2Hint">Ventana medida: horario laboral · canales activos: 3</span>
+            </div>
+            <div class="ap-kpi">
+              <span class="ap-kpi-lbl" data-i18n-key="mKpi3">Mensajes entrantes vs. semana anterior</span>
+              <strong>+18%</strong>
+              <span class="ap-kpi-hint" data-i18n-key="mKpi3Hint">412 esta semana · 349 la anterior</span>
+            </div>
+            <div class="ap-kpi">
+              <span class="ap-kpi-lbl" data-i18n-key="mKpi4">Ingresos cerrados (30 d)</span>
+              <strong>USD 184K</strong>
+              <span class="ap-kpi-hint" data-i18n-key="mKpi4Hint">14 ventas atribuidas a hilos multicanal</span>
+            </div>
+            <div class="ap-kpi">
+              <span class="ap-kpi-lbl" data-i18n-key="mKpi5">Tasa de cierre vs. cotizado</span>
+              <strong>37%</strong>
+              <span class="ap-kpi-hint" data-i18n-key="mKpi5Hint">38 propuestas enviadas · 14 ganadas</span>
+            </div>
+            <div class="ap-kpi">
+              <span class="ap-kpi-lbl" data-i18n-key="mKpi6">Tiempo en panel (equipo)</span>
+              <strong>62 h</strong>
+              <span class="ap-kpi-hint" data-i18n-key="mKpi6Hint">Esta semana · mediana de sesión 11 min</span>
+            </div>
+          </div>
+          <div class="ap-analytics-split">
+            <div class="ap-pane-card" style="margin-bottom:0">
+              <div class="ap-metric-h2" data-i18n-key="mSalesTitle">Ventas y pipeline</div>
+              <div class="ap-metric-lines">
+                <div class="ap-metric-line"><span data-i18n-key="mSalesWon">Ganadas (30 d)</span><strong>USD 184K</strong></div>
+                <div class="ap-metric-line"><span data-i18n-key="mSalesOpen">En negociación</span><strong>USD 96K</strong></div>
+                <div class="ap-metric-line"><span data-i18n-key="mSalesLost">Perdidas / archivadas</span><strong>6</strong></div>
+                <div class="ap-metric-line"><span data-i18n-key="mSalesTicket">Ticket medio ganado</span><strong>USD 13,1K</strong></div>
+              </div>
+              <p style="margin:10px 0 0;font-size:9px;color:var(--muted);line-height:1.45" data-i18n-key="mSalesFoot">Importes vinculados al contacto y al hilo en NEXUS (vista demo).</p>
+            </div>
+            <div class="ap-pane-card" style="margin-bottom:0">
+              <div class="ap-metric-h2" data-i18n-key="mAutoTitle">Automatización NEXUS (7 d)</div>
+              <div class="ap-metric-lines">
+                <div class="ap-metric-line"><span data-i18n-key="mAutoR24">Recordatorios 24 h enviados</span><strong>128</strong></div>
+                <div class="ap-metric-line"><span data-i18n-key="mAutoR1">Recordatorios 1 h + resumen</span><strong>54</strong></div>
+                <div class="ap-metric-line"><span data-i18n-key="mAutoBf">Briefings 08:00 entregados</span><strong>7</strong></div>
+                <div class="ap-metric-line"><span data-i18n-key="mAutoSum">Resúmenes IA (texto / audio)</span><strong>89</strong></div>
+                <div class="ap-metric-line"><span data-i18n-key="mAutoCal">Eventos de agenda creados</span><strong>36</strong></div>
+              </div>
+              <p style="margin:10px 0 0;font-size:9px;color:var(--muted);line-height:1.45" data-i18n-key="mAutoFoot">Conteos alineados a recordatorios, briefing matutino, comandos resumen/audio y detección de fechas.</p>
+            </div>
+          </div>
+          <div class="ap-pane-card">
+            <div class="ap-metric-h2" data-i18n-key="mUsageTitle">Uso del equipo en la app</div>
+            <div class="ap-metric-lines">
+              <div class="ap-metric-line"><span data-i18n-key="mUsagePanel">Horas en bandeja / panel (semana)</span><strong>62 h</strong></div>
+              <div class="ap-metric-line"><span data-i18n-key="mUsageSes">Sesiones por usuario (mediana)</span><strong>24</strong></div>
+              <div class="ap-metric-line"><span data-i18n-key="mUsageWA">Respuestas enviadas vía WhatsApp</span><strong>1.420</strong></div>
+              <div class="ap-metric-line"><span data-i18n-key="mUsageFollow">Seguimientos 7 d disparados</span><strong>31</strong></div>
+            </div>
+            <p style="margin:10px 0 0;font-size:9px;color:var(--muted);line-height:1.45" data-i18n-key="mUsageFoot">Incluye inbox, contactos, agenda, métricas y automatizaciones visibles en esta demo.</p>
+          </div>
+          <div class="ap-pane-card">
+            <div class="ap-metric-h2" data-i18n-key="mChanTitle">Participación por canal (mensajes entrantes, esta semana)</div>
+            <div class="ap-hbar-row"><span>WhatsApp</span><div class="ap-hbar-track"><div class="ap-hbar-fill" style="width:42%"></div></div><span class="ap-hbar-pct">42%</span></div>
+            <div class="ap-hbar-row"><span>Instagram</span><div class="ap-hbar-track"><div class="ap-hbar-fill" style="width:35%;background:linear-gradient(90deg,#E4405F,rgba(228,64,95,.4))"></div></div><span class="ap-hbar-pct">35%</span></div>
+            <div class="ap-hbar-row"><span>Correo</span><div class="ap-hbar-track"><div class="ap-hbar-fill" style="width:23%;background:linear-gradient(90deg,#7C9AFF,rgba(124,154,255,.4))"></div></div><span class="ap-hbar-pct">23%</span></div>
+            <p style="margin:10px 0 0;font-size:9px;color:var(--muted);line-height:1.45" data-i18n-key="mChanFoot">Los porcentajes suman el total de mensajes entrantes de la semana y sirven para ver en qué redes concentrás la demanda.</p>
+          </div>
+          
+          <div class="ap-pane-card ap-week-wrap">
+            <div class="ap-metric-h2" data-i18n-key="mDayTitle">Mensajes entrantes por día (lun → dom)</div>
+            <div class="ap-week-chart">
+              <div class="ap-week-col"><span class="ap-week-val">38</span><div class="ap-week-bar" style="height:38%"></div><span class="ap-week-dow" data-i18n-key="dow1">Lun</span></div>
+              <div class="ap-week-col"><span class="ap-week-val">45</span><div class="ap-week-bar" style="height:45%"></div><span class="ap-week-dow" data-i18n-key="dow2">Mar</span></div>
+              <div class="ap-week-col"><span class="ap-week-val">52</span><div class="ap-week-bar" style="height:52%"></div><span class="ap-week-dow" data-i18n-key="dow3">Mié</span></div>
+              <div class="ap-week-col"><span class="ap-week-val">41</span><div class="ap-week-bar" style="height:41%"></div><span class="ap-week-dow" data-i18n-key="dow4">Jue</span></div>
+              <div class="ap-week-col"><span class="ap-week-val">67</span><div class="ap-week-bar" style="height:67%"></div><span class="ap-week-dow" data-i18n-key="dow5">Vie</span></div>
+              <div class="ap-week-col"><span class="ap-week-val">58</span><div class="ap-week-bar" style="height:58%"></div><span class="ap-week-dow" data-i18n-key="dow6">Sáb</span></div>
+              <div class="ap-week-col"><span class="ap-week-val">44</span><div class="ap-week-bar" style="height:44%"></div><span class="ap-week-dow" data-i18n-key="dow7">Dom</span></div>
+            </div>
+            <p style="margin:10px 0 0;font-size:9px;color:var(--muted);line-height:1.45" data-i18n-key="mDayFoot">Cada barra es el total de mensajes nuevos recibidos ese día en todos los canales conectados.</p>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div id="summary-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;align-items:center;justify-content:center;">
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px;width:340px;box-shadow:0 24px 60px rgba(0,0,0,.6);">
+      <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px;">¿Cómo querés el resumen?</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:16px;">Conversación con <span id="modal-name">Ana García</span></div>
+      <div id="opt-text" style="display:flex;gap:10px;padding:10px;border:1.5px solid var(--g);border-radius:var(--r);background:rgba(37,211,102,.05);cursor:pointer;margin-bottom:8px;" onclick="selectOpt('text')">
+        <span style="font-size:20px">📄</span>
+        <div><div style="font-size:12px;font-weight:500">Resumen en texto</div><div style="font-size:11px;color:var(--muted)">Puntos clave sin leer todo el historial</div></div>
+      </div>
+      <div id="opt-audio" style="display:flex;gap:10px;padding:10px;border:1px solid var(--border);border-radius:var(--r);cursor:pointer;margin-bottom:16px;" onclick="selectOpt('audio')">
+        <span style="font-size:20px">🎧</span>
+        <div><div style="font-size:12px;font-weight:500">Resumen en audio</div><div style="font-size:11px;color:var(--muted)">Nota de voz narrada, 40-60 segundos</div></div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="closeModal()" style="flex:1;padding:8px;border-radius:var(--r);border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;">Cancelar</button>
+        <button onclick="closeModal()" style="flex:1;padding:8px;border-radius:var(--r);border:none;background:var(--g);color:#000;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">✨ Generar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AGENDA · briefing matutino y recordatorios -->
+<section id="agenda">
+  <div class="sec-label">Calendario · reuniones</div>
+  <h2 class="sec-title">Tu agenda, avisada sola</h2>
+  <p class="sec-sub sec-wide"><strong>Todos los días a las 8:00</strong> (hora de Argentina configurada en el servidor) podés recibir por WhatsApp un <strong>briefing matutino</strong>: lista de reuniones de ese día con hora local y, en el mismo mensaje, un bloque con seguimientos pendientes (contactos sin respuesta hace tiempo). Los avisos llegan en castellano. En <strong>modo manual</strong> este envío no se dispara.</p>
+  <p class="sec-sub sec-wide" style="margin-top:1rem">Además, cada evento vinculado a un contacto tiene avisos puntuales: uno en torno a las <strong>24 horas</strong> antes del encuentro y otro en torno a la <strong>hora</strong> previa. En el de 1 h, si tu modo lo permite, NEXUS puede mandar aparte un <strong>resumen del hilo con esa persona</strong> para retomar el contexto.</p>
+  <p class="sec-note">En modo parcial el resumen de la hora previa puede quedar como acción pendiente hasta que confirmes; los recordatorios por reunión los revisa el servidor cada pocos minutos, sin necesidad de tener el panel abierto.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- CORREO -->
+<section id="correo">
+  <div class="sec-label">Gmail · Outlook · IMAP</div>
+  <h2 class="sec-title">Correo como canal más</h2>
+  <p class="sec-sub sec-wide">Cada remitente aparece como un contacto más en la bandeja: leés el hilo como un chat, respondés desde el mismo lugar y NEXUS mantiene el contexto junto al resto de canales. Podés conectar Gmail, Outlook o una casilla clásica por IMAP.</p>
+  <div class="mail-cards">
+    <div class="mail-card"><h4>Gmail</h4><p>Conexión segura con tu cuenta de Google. Los correos nuevos entran como conversaciones y podés responder sin salir del flujo habitual.</p></div>
+    <div class="mail-card"><h4>Outlook / Microsoft 365</h4><p>Ideal para equipos en entorno Microsoft. Misma bandeja, mismas automatizaciones y recordatorios que en el resto de canales.</p></div>
+    <div class="mail-card"><h4>IMAP genérico</h4><p>Para proveedores de correo tradicionales: una vez enlazada la casilla, los mensajes se integran al mismo panel y a las mismas reglas de seguimiento.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Producto local · castellano -->
+<section id="global">
+  <div class="sec-label">Producto local</div>
+  <h2 class="sec-title">Pensado para operar en castellano</h2>
+  <p class="sec-sub sec-wide">NEXUS Starter está orientado al mercado argentino: panel, avisos por WhatsApp, recordatorios y briefings en <strong>castellano</strong>. En la bandeja igual podés atender clientes que escriben en otro idioma: la traducción asistida muestra el original y la versión en español para tu equipo.</p>
+  <div class="i18n-grid" style="grid-template-columns:1fr;max-width:560px">
+    <div class="i18n-col">
+      <h4>Ejemplos de mensajes automáticos</h4>
+      <div class="i18n-sample"><span class="lbl">Recordatorio 24 h</span>📅 Recordatorio 24 h: *Demo con Ana* — vie, 3 may 2026, 15:00</div>
+      <div class="i18n-sample"><span class="lbl">Briefing 8:00</span>☀️ *Briefing* — reuniones de hoy:
+• 09:00 — Demo con Ana (Instagram)
+• 15:30 — Follow-up Ana
+• 11:00 — Cotización presupuesto@cliente.com
+
+Pedí <em>resumen [nombre]</em> antes de cada reunión si lo necesitás.</div>
+      <div class="i18n-sample"><span class="lbl">Seguimiento 7 días</span>⏳ <strong>Ana García</strong> (Instagram) — 7 días sin contacto. Último: «¿Cuándo me mandás el presupuesto?» Respondé <strong>SÍ</strong> para generar un mensaje de reapertura.</div>
+    </div>
+  </div>
+  <p class="sec-note">Más adelante se podrá ampliar a otros idiomas de interfaz; por ahora todo el producto y la documentación de esta versión están en castellano.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="sec-label">Funcionalidades</div>
+  <h2 class="sec-title">Todo lo que hace NEXUS</h2>
+  <p class="sec-sub">Cada función está diseñada para que quien lo usa no tenga que aprender nada. El sistema trabaja solo.</p>
+  <div class="features-grid">
+    <div class="feat-card"><div class="feat-icon" style="background:rgba(37,211,102,.12)">💬</div><div class="feat-title">Bandeja unificada</div><div class="feat-desc">WhatsApp Business, Instagram DMs y correo (Gmail / Outlook / IMAP) en un solo panel, con filtros y búsqueda.</div></div>
+    <div class="feat-card"><div class="feat-icon" style="background:rgba(55,138,221,.12)">🗄️</div><div class="feat-title">Base de datos automática</div><div class="feat-desc">Cada conversación se guarda sola. La IA extrae precios, fechas, intención y urgencia de cada mensaje en tiempo real.</div></div>
+    <div class="feat-card"><div class="feat-icon" style="background:rgba(167,139,250,.12)">📝</div><div class="feat-title">Resúmenes en texto</div><div class="feat-desc">Escribí "resumen" en WhatsApp y recibís un resumen estructurado con estado del prospecto y próximo paso sugerido.</div></div>
+    <div class="feat-card"><div class="feat-icon" style="background:rgba(226,75,74,.12)">🎧</div><div class="feat-title">Resúmenes en audio</div><div class="feat-desc">Nota de voz narrada de 40-60 segundos generada con ElevenLabs. Escuchás lo esencial sin leer nada.</div></div>
+    <div class="feat-card"><div class="feat-icon" style="background:rgba(245,166,35,.12)">📅</div><div class="feat-title">Calendario automático</div><div class="feat-desc">Las fechas mencionadas en los chats se enlazan al calendario. Aviso ~24 h antes y ~1 h antes; en la hora previa podés recibir el resumen del hilo con el contacto de esa reunión (según modo de automatización).</div></div>
+    <div class="feat-card"><div class="feat-icon" style="background:rgba(255,193,7,.14)">☀️</div><div class="feat-title">Briefing a las 8:00</div><div class="feat-desc">Cada día, un mensaje con la agenda del día (reuniones con hora) y el bloque de seguimientos pendientes, al WhatsApp del responsable. Desactivado en modo manual.</div></div>
+    <div class="feat-card"><div class="feat-icon" style="background:rgba(37,211,102,.12)">🔔</div><div class="feat-title">Seguimiento automático</div><div class="feat-desc">A los 7 días avisa. A los 14 manda el resumen. A los 30 genera un mensaje de reapertura con IA listo para aprobar.</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AUTOMATION MODES -->
+<section id="automation">
+  <div class="sec-label">Modos de automatización</div>
+  <h2 class="sec-title">Tu app, a tu ritmo</h2>
+  <p class="sec-sub" style="margin-bottom:28px;">Elegís cuánto control querés tener. Podés cambiar el modo en cualquier momento escribiendo un comando en WhatsApp.</p>
+  <div class="mode-grid">
+    <div class="mode-card sel-auto" id="mc-auto" onclick="selectMode('auto')">
+      <div class="mode-icon">🤖</div><div class="mode-name">Automático total</div>
+      <div class="mode-desc">NEXUS hace todo solo. Crea eventos, manda recordatorios, sigue contactos y adjunta resúmenes sin que hagas nada.</div>
+      <div class="mode-pill" style="background:rgba(37,211,102,.12);color:var(--g);">Recomendado · comando: modo auto</div>
+    </div>
+    <div class="mode-card" id="mc-partial" onclick="selectMode('partial')">
+      <div class="mode-icon">⚙️</div><div class="mode-name">Semi-automático</div>
+      <div class="mode-desc">Guarda y analiza solo, pero pide confirmación antes de crear eventos o mandar mensajes al exterior.</div>
+      <div class="mode-pill" style="background:rgba(55,138,221,.12);color:#378ADD;">Con control · comando: modo parcial</div>
+    </div>
+    <div class="mode-card" id="mc-manual" onclick="selectMode('manual')">
+      <div class="mode-icon">🎛️</div><div class="mode-name">Manual</div>
+      <div class="mode-desc">Nada ocurre solo. Vos activás cada función con un comando en WhatsApp cuando lo necesitás.</div>
+      <div class="mode-pill" style="background:rgba(245,166,35,.12);color:var(--amber);">A demanda · comando: modo manual</div>
+    </div>
+  </div>
+  <table class="behavior-table">
+    <thead>
+      <tr><th>Función</th><th id="th-auto" style="color:var(--g)">🤖 Automático</th><th id="th-partial">⚙️ Semi-auto</th><th id="th-manual">🎛️ Manual</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="td-feat">Guardar mensajes en BD</td><td><span class="badge-auto">Siempre</span></td><td><span class="badge-auto">Siempre</span></td><td><span class="badge-auto">Siempre</span></td></tr>
+      <tr><td class="td-feat">Extraer metadatos IA</td><td><span class="badge-auto">Siempre</span></td><td><span class="badge-auto">Siempre</span></td><td><span class="badge-auto">Siempre</span></td></tr>
+      <tr><td class="td-feat">Crear eventos en Google Calendar</td><td><span class="badge-auto">Automático</span></td><td><span class="badge-partial">Confirmar</span></td><td><span class="badge-manual">crear evento</span></td></tr>
+      <tr><td class="td-feat">Briefing 8:00 (todos los días, agenda del día)</td><td><span class="badge-auto">Activado</span></td><td><span class="badge-auto">Activado</span></td><td><span class="badge-off">Desactivado</span></td></tr>
+      <tr><td class="td-feat">Recordatorio 24hs antes</td><td><span class="badge-auto">Activado</span></td><td><span class="badge-auto">Activado</span></td><td><span class="badge-off">Desactivado</span></td></tr>
+      <tr><td class="td-feat">Recordatorio 1hs con resumen</td><td><span class="badge-auto">Automático</span></td><td><span class="badge-partial">Confirmar</span></td><td><span class="badge-off">Desactivado</span></td></tr>
+      <tr><td class="td-feat">Seguimiento 7 días sin respuesta</td><td><span class="badge-auto">Activado</span></td><td><span class="badge-auto">Activado</span></td><td><span class="badge-off">Desactivado</span></td></tr>
+      <tr><td class="td-feat">Mensaje de reapertura 30 días</td><td><span class="badge-partial">Confirmar</span></td><td><span class="badge-partial">Confirmar</span></td><td><span class="badge-manual">retomar [nombre]</span></td></tr>
+      <tr><td class="td-feat">Resumen en texto</td><td><span class="badge-auto">Auto en 1hs</span></td><td><span class="badge-manual">resumen [nombre]</span></td><td><span class="badge-manual">resumen [nombre]</span></td></tr>
+      <tr><td class="td-feat">Resumen en audio</td><td><span class="badge-manual">audio [nombre]</span></td><td><span class="badge-manual">audio [nombre]</span></td><td><span class="badge-manual">audio [nombre]</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="divider"></div>
+
+<!-- ONBOARDING -->
+<section id="onboarding" style="padding-bottom:100px;">
+  <div class="sec-label">Configuración inicial</div>
+  <h2 class="sec-title" style="text-align:center;">Onboarding en 5 pasos</h2>
+  <p class="sec-sub" style="margin-bottom:32px;text-align:center;margin-left:auto;margin-right:auto;">Una vez configurado, NEXUS funciona solo. Esta pantalla se ve en el navegador.</p>
+  <div class="ob-shell">
+    <div class="ob-topbar">
+      <div class="ob-logo"><div class="ob-logo-mark">N</div><span class="ob-logo-name">NEXUS</span></div>
+      <div class="pills">
+        <div class="pill active" id="pl1">1</div><div class="pill-line" id="pc1"></div>
+        <div class="pill" id="pl2">2</div><div class="pill-line" id="pc2"></div>
+        <div class="pill" id="pl3">3</div><div class="pill-line" id="pc3"></div>
+        <div class="pill" id="pl4">4</div><div class="pill-line" id="pc4"></div>
+        <div class="pill" id="pl5">5</div>
+      </div>
+    </div>
+    <div class="ob-body">
+      <div class="ob-step active" id="os1">
+        <div class="ob-eyebrow">Paso 1 de 5</div>
+        <div class="ob-title">Bienvenida a NEXUS</div>
+        <div class="ob-sub">Configurá todo en menos de 5 minutos.</div>
+        <div class="field-group"><label class="field-label">Tu nombre</label><input class="field-input" type="text" placeholder="Tu nombre" id="inp-nombre" oninput="checkS1()"></div>
+        <div class="field-group"><label class="field-label">Tu WhatsApp</label><input class="field-input" type="tel" placeholder="+54 9 11 1234 5678" id="inp-wa" oninput="checkS1()"></div>
+        <div class="field-group"><label class="field-label">Zona horaria</label><select class="field-input"><option selected>Argentina (GMT-3)</option><option>Chile (GMT-4)</option><option>México (GMT-6)</option><option>España (GMT+1)</option></select></div>
+        <div class="ob-footer"><span></span><button type="button" class="ob-next" id="btn-s1" disabled onclick="goStep(2)">Continuar →</button></div>
+      </div>
+      <div class="ob-step" id="os2">
+        <div class="ob-eyebrow">Paso 2 de 5</div>
+        <div class="ob-title">Conectá tus redes</div>
+        <div class="ob-sub">Elegí Instagram y correo (Gmail, Outlook o IMAP).</div>
+        <div class="plat-grid">
+          <div class="plat-card connected"><div class="plat-dot-sm" style="background:var(--wa)"></div><span class="plat-name">WhatsApp</span><div class="plat-check">✓</div></div>
+          <div class="plat-card" onclick="togglePlat(this)"><div class="plat-dot-sm" style="background:var(--ig)"></div><span class="plat-name">Instagram</span><div class="plat-check"></div></div>
+          <div class="plat-card" onclick="togglePlat(this)"><div class="plat-dot-sm" style="background:var(--mail)"></div><span class="plat-name">Correo</span><div class="plat-check"></div></div>
+        </div>
+        <button type="button" onclick="connectPlats(event)" style="width:100%;padding:9px;border-radius:var(--rl);background:var(--g);border:none;color:#000;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:12px;" id="connect-btn">Conectar seleccionadas</button>
+        <div class="ob-footer"><button type="button" class="ob-skip" onclick="goStep(3)">Saltar</button><button type="button" class="ob-next" onclick="goStep(3)">Continuar →</button></div>
+      </div>
+      <div class="ob-step" id="os3">
+        <div class="ob-eyebrow">Paso 3 de 5</div>
+        <div class="ob-title">Google Calendar</div>
+        <div class="ob-sub">NEXUS va a detectar fechas en tus chats y crear los eventos automáticamente.</div>
+        <button type="button" id="gcal-btn" onclick="connectGcal(event)" style="width:100%;padding:10px;border-radius:var(--rl);border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px;">📅 Conectar Google Calendar</button>
+        <p style="font-size:12px;color:var(--muted);margin:0 0 12px;line-height:1.55;max-width:520px">El enlace se abre en <strong>otra pestaña</strong> para que esta demo no se cierre. Si el navegador bloquea ventanas emergentes, permitilas una vez; siempre podés usar <strong>Continuar</strong> o <strong>Saltar</strong>.</p>
+        <div class="ob-footer"><button type="button" class="ob-skip" onclick="goStep(4)">Saltar</button><button type="button" class="ob-next" onclick="goStep(4)">Continuar →</button></div>
+      </div>
+      <div class="ob-step" id="os4">
+        <div class="ob-eyebrow">Paso 4 de 5</div>
+        <div class="ob-title">Modo y preferencias</div>
+        <div class="ob-sub">¿Cuánto control querés tener sobre las automatizaciones?</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:16px;">
+          <div id="m-auto" onclick="pickMode('auto')" style="padding:10px;border-radius:var(--r);border:1.5px solid var(--g);background:rgba(37,211,102,.06);cursor:pointer;text-align:center;"><div style="font-size:16px;margin-bottom:4px;">🤖</div><div style="font-size:11px;font-weight:600;">Automático</div></div>
+          <div id="m-partial" onclick="pickMode('partial')" style="padding:10px;border-radius:var(--r);border:1px solid var(--border2);cursor:pointer;text-align:center;"><div style="font-size:16px;margin-bottom:4px;">⚙️</div><div style="font-size:11px;font-weight:600;">Semi-auto</div></div>
+          <div id="m-manual" onclick="pickMode('manual')" style="padding:10px;border-radius:var(--r);border:1px solid var(--border2);cursor:pointer;text-align:center;"><div style="font-size:16px;margin-bottom:4px;">🎛️</div><div style="font-size:11px;font-weight:600;">Manual</div></div>
+        </div>
+        <div class="toggle-row"><div><div class="toggle-label">Briefing 8:00 · todos los días</div><div class="toggle-sub">Agenda del día + seguimientos (WhatsApp)</div></div><div class="toggle on" onclick="this.classList.toggle('on')"><div class="toggle-thumb"></div></div></div>
+        <div class="toggle-row"><div><div class="toggle-label">Recordatorio 24hs antes</div></div><div class="toggle on" onclick="this.classList.toggle('on')"><div class="toggle-thumb"></div></div></div>
+        <div class="toggle-row"><div><div class="toggle-label">Seguimiento automático</div><div class="toggle-sub">Avisar cuando alguien lleva +7 días sin respuesta</div></div><div class="toggle on" onclick="this.classList.toggle('on')"><div class="toggle-thumb"></div></div></div>
+        <div class="ob-footer"><button type="button" class="ob-skip" onclick="goStep(5)">Usar defaults</button><button type="button" class="ob-next" onclick="goStep(5)">Continuar →</button></div>
+      </div>
+      <div class="ob-step" id="os5">
+        <div class="success-icon">🎉</div>
+        <div class="ob-title" style="text-align:center;margin-bottom:6px;">¡NEXUS está listo!</div>
+        <div class="ob-sub" style="text-align:center;margin-bottom:20px;">Todo configurado. Desde ahora funciona automáticamente.</div>
+        <div class="feat-list">
+          <div class="feat-row"><div class="feat-check-circle">✓</div><div><div class="feat-row-text">Bandeja unificada activa</div><div class="feat-row-sub">Todos tus mensajes en un solo lugar</div></div></div>
+          <div class="feat-row"><div class="feat-check-circle">✓</div><div><div class="feat-row-text">Base de datos automática</div><div class="feat-row-sub">Cada conversación se guarda sin que hagas nada</div></div></div>
+          <div class="feat-row"><div class="feat-check-circle">✓</div><div><div class="feat-row-text">Canales extendidos</div><div class="feat-row-sub">WhatsApp Business, Instagram DMs y correo conectados al mismo flujo</div></div></div>
+          <div class="feat-row"><div class="feat-check-circle">✓</div><div><div class="feat-row-text">Resúmenes en texto y audio</div><div class="feat-row-sub">Pedílos cuando los necesitás</div></div></div>
+          <div class="feat-row"><div class="feat-check-circle">✓</div><div><div class="feat-row-text">Briefing diario 8:00</div><div class="feat-row-sub">Agenda del día y seguimientos en el mismo mensaje</div></div></div>
+          <div class="feat-row"><div class="feat-check-circle">✓</div><div><div class="feat-row-text">Seguimiento automático activado</div><div class="feat-row-sub">Avisos cuando un contacto lleva +7 días sin respuesta</div></div></div>
+        </div>
+        <div class="wa-cmd-box">
+          <div class="wa-cmd-title">Tus primeros comandos</div>
+          <div class="wa-cmd-text">Resumen por contacto: <strong>resumen</strong> + nombre · Audio: <strong>audio</strong> + nombre · Idioma de ayudas y avisos: <strong>idioma</strong> + el código que uses en tu cuenta · Cambiar modo: <strong>modo manual</strong> · Lista activa: <strong>pendientes</strong></div>
+        </div>
+        <div class="ob-footer"><span></span><button type="button" class="ob-next" onclick="finishOb()">Ir a mi bandeja →</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p style="margin-bottom:12px">
+    <a href="/app" style="color:var(--g);font-weight:600;text-decoration:none">Abrir panel real</a>
+    <span style="color:var(--hint);margin:0 8px">·</span>
+    <a href="/bandeja" style="color:var(--g);font-weight:600;text-decoration:none">Bandeja</a>
+    <span style="color:var(--hint);margin:0 8px">·</span>
+    <a href="/health" style="color:var(--g);font-weight:600;text-decoration:none">Estado del servidor</a>
+  </p>
+  NEXUS · LA APP QUE SIMPLIFICA TODO
+</footer>
+
+<script>
+function jumpTo(id, navBtn) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.nav-link').forEach((l) => l.classList.remove('active'));
+  if (navBtn && navBtn.classList && navBtn.classList.contains('nav-link')) {
+    navBtn.classList.add('active');
+  }
+}
+const contactData = {
+
+  'Ana García': {
+    av: 'AG', bg: '#E1306C', avColor: '#000',
+    badgeHtml: '<i class="fa-brands fa-instagram"></i> Instagram',
+    platBg: '#E1306C',
+    summary: 'Ana contactó el 28/Mar interesada en diseño. Consultó paquetes, se interesó en Profesional ($450). Reunión virtual acordada Lun 3 May 15hs.',
+    status: 'Plataforma: Instagram · @ana.garcia<br>Primer contacto: 28 Mar 2025<br>Conversaciones: 3',
+    inputHint: 'Respondé desde WhatsApp hacia Instagram…',
+    tagsHtml: '<span class="ap-tag hot">🔥 Prospecto caliente</span><span class="ap-tag">Diseño</span><span class="ap-tag">$450</span>',
+    thread: `<div class="ap-ai-tag">💾 Base de datos guardada · hace 3 días</div>
+<div class="ap-msg-group"><div class="ap-bubble in">Hola! Vi tu perfil y me interesa mucho tu servicio de diseño. ¿Podés contarme sobre los paquetes?</div></div>
+<div class="ap-msg-group out"><div class="ap-bubble out">¡Hola Ana! Tenemos tres paquetes: básico, profesional ($450 USD) y premium.</div></div>
+<div class="ap-msg-group"><div class="ap-bubble in">I am comparing two agencies — can you send a one-page PDF in English?</div><div class="ap-trans"><span class="ap-trans-h"><i class="fa-solid fa-globe"></i> Traducción IA (EN → ES)</span>Estoy comparando dos agencias: ¿podés enviar un PDF de una página en inglés?</div></div>
+<div class="ap-msg-group out"><div class="ap-bubble out">Sí, te lo mando hoy. ¿Te sirve versión en portugués también?</div><div class="ap-trans"><span class="ap-trans-h"><i class="fa-solid fa-globe"></i> Traducción IA (ES → PT)</span>Sim, envio hoje. Quer também uma versão em português?</div></div>
+<div class="ap-ai-tag">📅 Evento creado en Google Calendar · Lun 3 Mayo 15hs</div>
+<div class="ap-msg-group"><div class="ap-bubble in">¿Cuándo me mandás el presupuesto?</div></div>`,
+  },
+  'Marie Dubois': {
+    av: 'MD', bg: '#C13584', avColor: '#fff',
+    badgeHtml: '<i class="fa-brands fa-instagram"></i> Instagram',
+    platBg: '#E1306C',
+    summary: 'Marie (Bélgica) preguntó por envíos y plazos en francés. Respuesta enviada en español con traducción de cortesía al francés.',
+    status: 'Plataforma: Instagram · @marie.dubois<br>Primer contacto: 10 May 2026<br>Conversaciones: 1',
+    inputHint: 'Respondé desde WhatsApp hacia Instagram…',
+    tagsHtml: '<span class="ap-tag">UE</span><span class="ap-tag">Logística</span>',
+    thread: `<div class="ap-msg-group"><div class="ap-bubble in">Bonjour, est-ce que vous livrez en Belgique ? Quel est le délai moyen ?</div><div class="ap-trans"><span class="ap-trans-h"><i class="fa-solid fa-globe"></i> Traducción IA (FR → ES)</span>Buenos días, ¿hacen envíos a Bélgica? ¿Cuál es el plazo medio?</div></div>
+<div class="ap-msg-group out"><div class="ap-bubble out">¡Hola Marie! Sí, enviamos a toda la UE en 5–7 días hábiles.</div><div class="ap-trans"><span class="ap-trans-h"><i class="fa-solid fa-globe"></i> Traducción IA (ES → FR)</span>Bonjour Marie ! Oui, nous livrons dans toute l’UE en 5 à 7 jours ouvrables.</div></div>`,
+  },
+
+  'Valentina Costa': {
+    av: 'VC', bg: '#128C7E', avColor: '#fff',
+    badgeHtml: '<i class="fa-brands fa-whatsapp"></i> WhatsApp',
+    platBg: '#25D366',
+    summary: 'Valentina escribió en italiano desde WhatsApp; NEXUS muestra el original y la traducción al español para la operadora.',
+    status: 'Plataforma: WhatsApp · +39 …<br>Primer contacto: 8 May 2026<br>Conversaciones: 1',
+    inputHint: 'Respondé desde tu número hacia WhatsApp…',
+    tagsHtml: '<span class="ap-tag">Italia</span><span class="ap-tag">Disponibilidad</span>',
+    thread: `<div class="ap-msg-group"><div class="ap-bubble in">Ciao! Avete postazioni disponibili a marzo? Siamo in due.</div><div class="ap-trans"><span class="ap-trans-h"><i class="fa-solid fa-globe"></i> Traducción IA (IT → ES)</span>¡Hola! ¿Tienen cupos disponibles en marzo? Somos dos.</div></div>
+<div class="ap-msg-group out"><div class="ap-bubble out">Sí, marzo tenemos cupos los jueves. ¿Les sirve plan flexible?</div><div class="ap-trans"><span class="ap-trans-h"><i class="fa-solid fa-globe"></i> Traducción IA (ES → IT)</span>Sì, a marzo abbiamo posti il giovedì. Vi va un piano flessibile?</div></div>`,
+  },
+
+
+
+
+  'presupuesto@cliente.com': {
+    av: '@', bg: '#7C9AFF', avColor: '#fff',
+    badgeHtml: '<i class="fa-solid fa-envelope"></i> Correo',
+    platBg: '#4285F4',
+    summary: 'Correo entrante: consulta por paquete profesional. Remitente unificado como contacto email en la misma bandeja.',
+    status: 'Plataforma: Correo · presupuesto@cliente.com<br>Primer contacto: 11 May 2025<br>Conversaciones: 1',
+    inputHint: 'Respondé desde WhatsApp o enviá respuesta por correo…',
+    tagsHtml: '<span class="ap-tag">Lead email</span><span class="ap-tag">$450</span>',
+    thread: `<div class="ap-ai-tag">📧 Hilos de Gmail / Outlook / IMAP aparecen acá como chats</div>
+<div class="ap-msg-group"><div class="ap-bubble in">Subject: Professional package — Could you share a quote in English?</div><div class="ap-trans"><span class="ap-trans-h"><i class="fa-solid fa-globe"></i> Traducción IA (EN → ES)</span>Asunto: Paquete profesional — ¿Podrían enviar una cotización en inglés?</div></div>
+<div class="ap-msg-group out"><div class="ap-bubble out">Adjunto PDF con pricing en USD y EUR. ¿Preferís factura A o B?</div><div class="ap-trans"><span class="ap-trans-h"><i class="fa-solid fa-globe"></i> Traducción IA (ES → EN)</span>Attached PDF with pricing in USD and EUR. Do you prefer invoice A or B?</div></div>`,
+  },
+  'Sofía Molina': {
+    av: 'SM', bg: '#833AB4', avColor: '#fff',
+    badgeHtml: '<i class="fa-brands fa-instagram"></i> Instagram',
+    platBg: '#E1306C',
+    summary: 'Sofía agradece el trabajo realizado. Proyecto cerrado exitosamente. Estado: cerrado.',
+    status: 'Plataforma: Instagram · @sofia.molina<br>Primer contacto: 10 Mar 2025<br>Conversaciones: 5',
+    inputHint: 'Respondé desde WhatsApp hacia Instagram…',
+    tagsHtml: '<span class="ap-tag">Cerrado</span>',
+    thread: `<div class="ap-msg-group"><div class="ap-bubble in">¡Muchas gracias por todo! Quedó hermoso el sitio.</div></div>
+<div class="ap-msg-group out"><div class="ap-bubble out">Gracias a vos Sofía — cualquier ajuste menor avisame.</div></div>`,
+  },
+};
+(function initAppShellDemo() {
+  const demoUiStrings = {
+    es: {
+      demoUiLabel: 'Vista interactiva (demo)',
+      search: 'Buscar...',
+      online: '● En línea',
+      filterAll: 'Todos',
+      today: 'Hoy',
+      aiSummary: '🤖 Resumen IA',
+      cardEvents: 'Próximos eventos',
+      cardContact: 'Estado del contacto',
+      paneCalendar: 'Agenda',
+      paneCalendarSub: 'Vista previa: los eventos que detecta NEXUS en los chats aparecen acá y en Google Calendar.',
+      calDemo1: 'Lun 09:00 — Demo con Ana (Instagram)',
+      calDemo2: 'Mar 15:30 — Follow-up Ana (Instagram)',
+      calDemo3: 'Mié 11:00 — Cotización presupuesto@cliente.com (Correo)',
+      paneTeam: 'Equipo',
+      paneTeamSub: 'Roles de ejemplo: en producción cada operador responde desde su WhatsApp con permisos definidos.',
+      roleSales: 'Ventas',
+      roleOps: 'Operaciones',
+      roleSupport: 'Atención al cliente',
+      rolePartner: 'Partner EU',
+      paneAnalytics: 'Métricas',
+      paneAnalyticsSub: 'Vista demo agregada: operación multicanal, ventas cerradas, automatización NEXUS (recordatorios, briefings, resúmenes IA, agenda) y tiempo de uso del panel.',
+      mKpi1: 'Respuestas dentro de SLA (24 h)',
+      mKpi1Hint: 'Meta del equipo: 90% · conversaciones medidas: 186',
+      mKpi2: 'Primera respuesta humana (mediana)',
+      mKpi2Hint: 'Ventana medida: horario laboral · canales activos: 3',
+      mKpi3: 'Mensajes entrantes vs. semana anterior',
+      mKpi3Hint: '412 esta semana · 349 la anterior',
+      mKpi4: 'Ingresos cerrados (30 d)',
+      mKpi4Hint: '14 ventas atribuidas a hilos multicanal',
+      mKpi5: 'Tasa de cierre vs. cotizado',
+      mKpi5Hint: '38 propuestas enviadas · 14 ganadas',
+      mKpi6: 'Tiempo en panel (equipo)',
+      mKpi6Hint: 'Esta semana · mediana de sesión 11 min',
+      mSalesTitle: 'Ventas y pipeline',
+      mSalesWon: 'Ganadas (30 d)',
+      mSalesOpen: 'En negociación',
+      mSalesLost: 'Perdidas / archivadas',
+      mSalesTicket: 'Ticket medio ganado',
+      mSalesFoot: 'Importes vinculados al contacto y al hilo en NEXUS (vista demo).',
+      mAutoTitle: 'Automatización NEXUS (7 d)',
+      mAutoR24: 'Recordatorios 24 h enviados',
+      mAutoR1: 'Recordatorios 1 h + resumen',
+      mAutoBf: 'Briefings 08:00 entregados',
+      mAutoSum: 'Resúmenes IA (texto / audio)',
+      mAutoCal: 'Eventos de agenda creados',
+      mAutoFoot: 'Conteos alineados a recordatorios, briefing matutino, comandos resumen/audio y detección de fechas.',
+      mUsageTitle: 'Uso del equipo en la app',
+      mUsagePanel: 'Horas en bandeja / panel (semana)',
+      mUsageSes: 'Sesiones por usuario (mediana)',
+      mUsageWA: 'Respuestas enviadas vía WhatsApp',
+      mUsageFollow: 'Seguimientos 7 d disparados',
+      mUsageFoot: 'Incluye inbox, contactos, agenda, métricas y automatizaciones visibles en esta demo.',
+      mChanTitle: 'Participación por canal (mensajes entrantes, esta semana)',
+      mChanFoot: 'Los porcentajes suman el total de mensajes entrantes de la semana y sirven para ver en qué redes concentrás la demanda.',
+      mDayTitle: 'Mensajes entrantes por día (lun → dom)',
+      mDayFoot: 'Cada barra es el total de mensajes nuevos recibidos ese día en todos los canales conectados.',
+      dow1: 'Lun', dow2: 'Mar', dow3: 'Mié', dow4: 'Jue', dow5: 'Vie', dow6: 'Sáb', dow7: 'Dom',
+    },
+  };
+  window.applyDemoUiLang = function () {
+    const s = demoUiStrings.es;
+    document.querySelectorAll('#app [data-i18n-key]').forEach((el) => {
+      const k = el.getAttribute('data-i18n-key');
+      if (!k || s[k] == null) return;
+      if (el.querySelector(':scope > *')) return;
+      el.textContent = s[k];
+    });
+  };
+  window.switchAppView = function (view, sidebarBtn, tabBtn) {
+    document.querySelectorAll('#app .ap-pane').forEach((p) => p.classList.remove('is-active'));
+    const pane = document.getElementById('ap-pane-' + view);
+    if (pane) pane.classList.add('is-active');
+    document.querySelectorAll('.ap-sidebar .ap-icon[data-ap-view]').forEach((b) => b.classList.remove('on'));
+    const icon = sidebarBtn || document.querySelector('.ap-sidebar .ap-icon[data-ap-view="' + view + '"]');
+    if (icon) icon.classList.add('on');
+    document.querySelectorAll('.demo-view-tab[data-ap-view]').forEach((b) => b.classList.remove('active'));
+    const tab = tabBtn || document.querySelector('.demo-view-tab[data-ap-view="' + view + '"]');
+    if (tab) tab.classList.add('active');
+  };
+  applyDemoUiLang();
+})();
+function selectContact(el) {
+  const name = el.getAttribute('data-contact');
+  const d = contactData[name];
+  if (!d) return;
+  document.querySelectorAll('.ap-contact').forEach((c) => c.classList.remove('active'));
+  el.classList.add('active');
+  const u = el.querySelector('.unread');
+  if (u) u.style.display = 'none';
+  const cav = document.getElementById('chat-av');
+  cav.textContent = d.av;
+  cav.style.background = d.bg;
+  cav.style.color = d.avColor || '#000';
+  document.getElementById('chat-name').textContent = name;
+  const pb = document.getElementById('chat-plat');
+  pb.style.background = d.platBg || d.bg;
+  pb.innerHTML = d.badgeHtml;
+  document.getElementById('chat-input-display').textContent = d.inputHint;
+  document.getElementById('modal-name').textContent = name;
+  document.getElementById('right-summary').textContent = d.summary;
+  document.getElementById('right-status').innerHTML = d.status;
+  document.getElementById('chat-msgs').innerHTML = d.thread;
+  const tags = document.querySelector('.ap-tags');
+  if (tags && d.tagsHtml) tags.innerHTML = d.tagsHtml;
+}
+(function initInboxFilters() {
+  const root = document.getElementById('inbox-filters');
+  if (!root) return;
+  root.querySelectorAll('.inbox-filter').forEach((btn) => {
+    btn.addEventListener('click', function () {
+      root.querySelectorAll('.inbox-filter').forEach((b) => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      this.classList.add('active');
+      this.setAttribute('aria-selected', 'true');
+      const f = this.getAttribute('data-platform');
+      document.querySelectorAll('.ap-contact[data-platform]').forEach((row) => {
+        row.style.display = f === 'all' || row.getAttribute('data-platform') === f ? '' : 'none';
+      });
+    });
+  });
+})();
+function openSummary() {
+  const m = document.getElementById('summary-modal');
+  if (m) m.style.display = 'flex';
+}
+function closeModal() {
+  const m = document.getElementById('summary-modal');
+  if (m) m.style.display = 'none';
+}
+function selectOpt(type) {
+  const ta = document.getElementById('opt-text'), tb = document.getElementById('opt-audio');
+  if (!ta || !tb) return;
+  if (type === 'text') { ta.style.borderColor='var(--g)';ta.style.borderWidth='1.5px';ta.style.background='rgba(37,211,102,.05)';tb.style.borderColor='var(--border)';tb.style.borderWidth='1px';tb.style.background='transparent'; }
+  else { tb.style.borderColor='var(--g)';tb.style.borderWidth='1.5px';tb.style.background='rgba(37,211,102,.05)';ta.style.borderColor='var(--border)';ta.style.borderWidth='1px';ta.style.background='transparent'; }
+}
+(function () {
+  const sm = document.getElementById('summary-modal');
+  if (sm) sm.addEventListener('click', (e) => { if (e.target === e.currentTarget) closeModal(); });
+})();
+function selectMode(mode) {
+  ['auto','partial','manual'].forEach((m) => {
+    const c = document.getElementById('mc-' + m);
+    if (c) c.classList.remove('sel-auto','sel-partial','sel-manual');
+  });
+  const sel = document.getElementById('mc-' + mode);
+  if (sel) sel.classList.add('sel-' + mode);
+  ['th-auto','th-partial','th-manual'].forEach((id,i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.color = i===0?(mode==='auto'?'var(--g)':'var(--hint)'):i===1?(mode==='partial'?'#378ADD':'var(--hint)'):(mode==='manual'?'var(--amber)':'var(--hint)');
+  });
+}
+let obStep = 1;
+function checkS1() {
+  const n = document.getElementById('inp-nombre')?.value.trim(), w = document.getElementById('inp-wa')?.value.trim(), btn = document.getElementById('btn-s1');
+  if (btn) btn.disabled = !(n && w && w.length > 6);
+}
+function goStep(step) {
+  const panel = document.getElementById('os' + step);
+  if (!panel || step < 1 || step > 5) return;
+  document.querySelectorAll('.ob-step').forEach(s => s.classList.remove('active'));
+  panel.classList.add('active');
+  obStep = step;
+  for (let i = 1; i <= 5; i++) {
+    const pill = document.getElementById('pl' + i);
+    if (!pill) continue;
+    pill.classList.remove('done', 'active');
+    if (i < step) pill.classList.add('done');
+    else if (i === step) pill.classList.add('active');
+    if (i < 5) {
+      const line = document.getElementById('pc' + i);
+      if (line) line.classList.toggle('done', i < step);
+    }
+  }
+}
+function nxDemoOffline() {
+  try {
+    const p = location.protocol;
+    return p === 'file:' || p === 'blob:' || !location.host;
+  } catch (e) {
+    return true;
+  }
+}
+let _nxPlatsBusy = false;
+function togglePlat(card) {
+  try {
+    if (!card || card.classList.contains('connected')) return;
+    card.classList.toggle('sel');
+    const ch = card.querySelector('.plat-check');
+    if (ch) ch.textContent = card.classList.contains('sel') ? '✓' : '';
+  } catch (e) { console.warn(e); }
+}
+function connectPlats(ev) {
+  if (ev && typeof ev.preventDefault === 'function') ev.preventDefault();
+  const btn = document.getElementById('connect-btn');
+  if (!btn || _nxPlatsBusy) return;
+  _nxPlatsBusy = true;
+  try {
+    btn.disabled = true;
+    btn.textContent = 'Conectando...';
+    window.setTimeout(() => {
+      try {
+        const selected = document.querySelectorAll('.plat-card.sel');
+        if (!selected.length) {
+          btn.textContent = 'Tocá las redes que querés sumar (o Continuar / Saltar)';
+          btn.style.background = 'var(--g)';
+          return;
+        }
+        selected.forEach((c) => {
+          c.classList.remove('sel');
+          c.classList.add('connected');
+          const ch = c.querySelector('.plat-check');
+          if (ch) ch.textContent = '✓';
+        });
+        btn.textContent = '✓ Plataformas conectadas (demo)';
+        btn.style.background = '#128C7E';
+      } finally {
+        btn.disabled = false;
+        _nxPlatsBusy = false;
+      }
+    }, 650);
+  } catch (e) {
+    console.warn(e);
+    btn.textContent = 'Conectar seleccionadas';
+    btn.disabled = false;
+    _nxPlatsBusy = false;
+  }
+}
+function connectGcal(ev) {
+  if (ev && typeof ev.preventDefault === 'function') ev.preventDefault();
+  const b = document.getElementById('gcal-btn');
+  if (nxDemoOffline()) {
+    if (b) {
+      b.textContent = '✓ Listo (demo sin servidor): Calendar vinculado';
+      b.style.borderColor = 'var(--g)';
+      b.style.color = 'var(--text)';
+    }
+    return;
+  }
+  let opened = false;
+  try {
+    const calUrl = new URL('/api/auth/calendar', window.location.href).href;
+    const w = window.open(calUrl, '_blank', 'noopener,noreferrer');
+    opened = !!(w && !w.closed);
+  } catch (e) {
+    opened = false;
+  }
+  if (b) {
+    if (opened) {
+      b.textContent = '✓ Ventana de Google abierta — volvé aquí para seguir';
+      b.style.borderColor = 'var(--g)';
+      b.style.color = 'var(--text)';
+    } else {
+      b.textContent = '✓ Demo: Calendar marcado como conectado (popup bloqueado o sin red)';
+      b.style.borderColor = 'var(--g)';
+      b.style.color = 'var(--text)';
+    }
+  }
+}
+function pickMode(mode) {
+  try {
+    ['auto','partial','manual'].forEach((m) => {
+      const el = document.getElementById('m-' + m);
+      if (!el) return;
+      el.style.borderColor = 'var(--border2)';
+      el.style.borderWidth = '1px';
+      el.style.background = 'transparent';
+    });
+    const sel = document.getElementById('m-' + mode);
+    if (!sel) return;
+    const colors = { auto: 'var(--g)', partial: '#378ADD', manual: 'var(--amber)' };
+    sel.style.borderColor = colors[mode] || 'var(--g)';
+    sel.style.borderWidth = '1.5px';
+    sel.style.background = 'rgba(' + (mode === 'auto' ? '37,211,102' : mode === 'partial' ? '55,138,221' : '245,166,35') + ',.06)';
+  } catch (e) { console.warn(e); }
+}
+function finishOb() {
+  if (nxDemoOffline()) {
+    jumpTo('app');
+    return;
+  }
+  window.location.href = '/app';
+}
+</script>
+</body>
+</html>
