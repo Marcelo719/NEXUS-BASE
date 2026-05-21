@@ -324,7 +324,6 @@ async function transcribeAndProcess({ plataforma, waId, nombre, msg, phoneNumber
   // Whisper transcription — usa openai.audio.transcriptions
   try {
     const OpenAI = require('openai');
-    const fetch  = require('node-fetch');
     const fs     = require('fs');
     const path   = require('path');
     const os     = require('os');

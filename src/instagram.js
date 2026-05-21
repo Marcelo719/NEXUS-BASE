@@ -1,6 +1,5 @@
 'use strict';
 
-const fetch = require('node-fetch');
 const { processTextMessage } = require('./processor');
 const { checkRateLimit, isOwner, logUnauthorizedAttempt, isOwnerCommand } = require('./security');
 

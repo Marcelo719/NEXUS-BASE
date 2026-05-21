@@ -3,7 +3,6 @@
 const { createClient } = require('@supabase/supabase-js');
 const { getAuthenticatedGmailClient, getOutlookAccessToken } = require('./emailAuth');
 const { processTextMessage } = require('./processor');
-const fetch = require('node-fetch');
 
 const supabase = createClient(
   process.env.SUPABASE_URL,

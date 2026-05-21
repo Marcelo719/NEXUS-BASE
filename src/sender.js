@@ -1,7 +1,5 @@
 'use strict';
 
-const fetch = require('node-fetch');
-
 const WA_API_URL = 'https://graph.facebook.com/v20.0';
 
 /**
